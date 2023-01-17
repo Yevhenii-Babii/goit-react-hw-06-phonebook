@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormStyle, BtnAddContact, LabelName, InputForm } from './Form.styled';
-// import { nanoid } from 'nanoid'
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
@@ -10,12 +9,12 @@ export function Form() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
 
-  const contacts = useSelector(state=> state.contacts.contacts)
-  const exContact = contacts.some(user => user.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-  ) 
+  const contacts = useSelector(state => state.contacts.contacts);
+  const exContact = contacts.some(
+    user => user.name.toLocaleLowerCase() === name.toLocaleLowerCase()
+  );
 
-  
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const onInputText = event => {
     switch (event.target.name) {
@@ -34,13 +33,12 @@ export function Form() {
 
   const handleSubmit = event => {
     event.preventDefault();
-    if(exContact) { 
+    if (exContact) {
       return alert(`${name} is already in list`);
     }
-    // onSubmit({ name, number });
     setName('');
     setNumber('');
-    dispatch(addContact({ name, number, id: nanoid() }))
+    dispatch(addContact({ name, number, id: nanoid() }));
   };
   return (
     <>
